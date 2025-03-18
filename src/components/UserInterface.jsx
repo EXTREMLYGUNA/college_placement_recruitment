@@ -5,7 +5,7 @@ import TopBar from './TopBar'
 import Form from 'react-bootstrap/Form'
 import { useNavigate,useParams } from 'react-router-dom';
 import {UserContext} from '../App.jsx';
-import { findIndexById } from '../Helper';
+import { findIndexById } from '../helper.js';
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom';
 

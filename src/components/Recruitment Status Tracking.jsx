@@ -3,12 +3,12 @@ import React,{useContext,useEffect} from 'react'
 import TopBar from './TopBar'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { findIndexById } from '../Helper';
+import { findIndexById } from '../helper.js';
 import { useNavigate } from 'react-router-dom';
 import {UserContext} from '../App.jsx';
 import toast from 'react-hot-toast'
-import ApiRoutes from '../utils/apiRoutes.jsx';
-import api from '../service/apiService.jsx';
+// import ApiRoutes from '../utils/apiRoutes.jsx';
+// import api from '../service/apiService.jsx';
 
 function RecruitmentStatusTracking() {
   let {user,setUser} = useContext(UserContext)
