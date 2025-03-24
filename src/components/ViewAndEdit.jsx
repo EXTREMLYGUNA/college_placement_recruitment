@@ -15,6 +15,7 @@ function ViewAndEdit() {
     const [name,setName] = useState('')
     const [email,setEmail] = useState('')
     const [birth,setBirth] = useState('')
+    const [mobile,setMobile] = useState()
     const [age,setAge] = useState('')
     const [address,setAddress] = useState('')
     const [resume,setResume] = useState('')
@@ -27,10 +28,10 @@ function ViewAndEdit() {
     let index = findIndexById(user,Number(id))
   
     const handleSubmit = () =>{
-          const data = {id:Number(id),name,email,birth,age,address,resume,gender,status} 
+          const data = {id:Number(id),name,email,birth,mobile,age,address,resume,gender,status} 
           user.splice(index,1,data)
           setUser([...user])
-  
+
           navigate('/status')     
     }
     const getData = () =>{
@@ -40,6 +41,7 @@ function ViewAndEdit() {
           setName(user[index].name)
           setEmail(user[index].email)
           setBirth(user[index].birth)
+          setMobile(user[index].mobile)
           setAge(user[index].age)
           setAddress(user[index].address)
           setResume(user[index].resume)
@@ -78,7 +80,11 @@ function ViewAndEdit() {
                                     <Form.Group className="mb-3" >
                                       <Form.Label>Date Of Birth</Form.Label>
                                       <Form.Control type="date" id='birth' name='birth' value={birth} onChange={(e)=>setBirth(e.target.value)} required />
-                                    </Form.Group>       
+                                    </Form.Group>    
+                                    <Form.Group className="mb-3">
+                                      <Form.Label>Mobile Number</Form.Label>
+                                      <Form.Control type="number" id='mobile' placeholder="Enter your mobile number" name='mobile' value={mobile} onChange={(e)=>setMobile(e.target.value)} required />
+                                    </Form.Group>
                                     <Form.Group className="mb-3" >
                                       <Form.Label>Age</Form.Label>
                                       <Form.Control type="number" id='age' placeholder="Enter your Age" name='age' value={age} onChange={(e)=>setAge(e.target.value)} required/>
@@ -105,7 +111,7 @@ function ViewAndEdit() {
                                        <Form.Check type="checkbox" id='Active' checked={status}   label="Active"  name='Status' value={"Active"   } onChange={(e)=>setStatus(e.target.checked)} /> 
                                     </Form.Group> 
                                     <Button variant="primary" onClick = {()=>handleSubmit()}>
-                                      Submit
+                                      Update
                                     </Button>
                                  </Form>
                               </div> 

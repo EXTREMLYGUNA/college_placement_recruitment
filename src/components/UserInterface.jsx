@@ -15,6 +15,7 @@ function UserInterface() {
     const [name,setName] = useState('')
     const [email,setEmail] = useState('')
     const [birth,setBirth] = useState('')
+    const [mobile,setMobile] = useState()
     const [age,setAge] = useState('')
     const [address,setAddress] = useState('')
     const [resume,setResume] = useState('')
@@ -27,7 +28,7 @@ function UserInterface() {
     let index = findIndexById(user,Number(id))
   
     const handleSubmit = () =>{
-          const data = {id:Number(id),name,email,birth,age,address,resume,gender,status} 
+          const data = {id:Number(id),name,email,birth,mobile,age,address,resume,gender,status} 
           user.splice(index,1,data)
           setUser([...user])
   
@@ -40,6 +41,7 @@ function UserInterface() {
           setName(user[index].name)
           setEmail(user[index].email)
           setBirth(user[index].birth)
+          setMobile(user[index].mobile)
           setAge(user[index].age)
           setAddress(user[index].address)
           setResume(user[index].resume)
@@ -59,7 +61,7 @@ function UserInterface() {
       <h1>User Interface</h1>
       <nav className='card'>
          <div className='details'>
-              <div><Link to='/viewEdit/:id'           className='all'>VIEW & EDIT   </Link>
+              <div><Link to='/editStudents/:id'           className='all'>VIEW & EDIT   </Link>
               <div id="content-wrapper" className="d-flex flex-column" style={{display:'flex',width:'1000px'}}>
           <div id="content">
               <div className="container-fluid">
@@ -78,7 +80,11 @@ function UserInterface() {
                                     <Form.Group className="mb-3" >
                                       <Form.Label>Date Of Birth</Form.Label>
                                       <Form.Control type="date" id='birth' name='birth' value={birth} onChange={(e)=>setBirth(e.target.value)} required />
-                                    </Form.Group>       
+                                    </Form.Group>      
+                                    <Form.Group className="mb-3">
+                                      <Form.Label>Mobile Number</Form.Label>
+                                      <Form.Control type="number" id='mobile' placeholder="Enter your mobile number" name='mobile' value={mobile} onChange={(e)=>setMobile(e.target.value)} required />
+                                    </Form.Group> 
                                     <Form.Group className="mb-3" >
                                       <Form.Label>Age</Form.Label>
                                       <Form.Control type="number" id='age' placeholder="Enter your Age" name='age' value={age} onChange={(e)=>setAge(e.target.value)} required/>
@@ -105,7 +111,7 @@ function UserInterface() {
                                        <Form.Check type="checkbox" id='Active' checked={status}   label="Active"  name='Status' value={"Active"   } onChange={(e)=>setStatus(e.target.checked)} /> 
                                     </Form.Group> 
                                     <Button variant="primary" onClick = {()=>handleSubmit()}>
-                                      Submit
+                                      Update
                                     </Button>
                                  </Form>
                           

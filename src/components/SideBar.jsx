@@ -1,12 +1,70 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import Button from 'react-bootstrap/esm/Button'
 import { Link } from 'react-router-dom'
+import useLogout from '../service/useLogout'
+import { useNavigate } from 'react-router-dom'
 
 function SideBar() {
-  return <>
-    <ul className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+    let logout = useLogout()
+    let navigate = useNavigate()
+//     let options = [
+//         {
+//         value:"Dashboard",
+//         path:"/",
+//         role:["Student","Admin"]
+//     },
+//     {
+//         value:"Student and Application Management",
+//         path:"/",
+//         role:["Student","Admin"]
+//     },
+//     {
+//         value:"Interview Scheduling",
+//         path:"/",
+//         role:["Student","Admin"]
+//     },
+//     {
+//         value:"Company Coordination",
+//         path:"/",
+//         role:["Admin"]
+//     },
+//     {
+//         value:"Placement Drives Management",
+//         path:"/",
+//         role:["Admin"]
+//     },
+//     {
+//         value:"Recruitment Status Tracking",
+//         path:"/",
+//         role:["Student","Admin"]
+//     },
+//     {
+//         value:"Integration with Academic Records",
+//         path:"/",
+//         role:["Admin"]
+//     },
+//     {
+//         value:"Company Database Integration",
+//         path:"/",
+//         role:["Admin"]
+//     },
+//     {
+//         value:"User Interface",
+//         path:"/",
+//         role:["Student","Admin"]
+//     },
+//     {
+//         value:"Reports and Analytics",
+//         path:"/",
+//         role:["Admin"]
+//     },
+// ]
 
-<Link to="/" className="sidebar-brand d-flex align-items-center justify-content-center" >
+  return <>
+    <ul className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar" style={{display:"flex",position:"sticky"}}>
+
+<Link to="/dashboard" className="sidebar-brand d-flex align-items-center justify-content-center" >
     <div className="sidebar-brand-icon rotate-n-15">
         <i className="fas fa-graduation-cap"></i>
     </div>
@@ -14,25 +72,23 @@ function SideBar() {
 </Link>
 
 <hr className="sidebar-divider my-0"/>
-
+ 
 <li className="nav-item active">
-    <Link to='/dashboard' className="nav-link" >
+    <Link to='/' className="nav-link" >
         <i className="fas fa fa-briefcase"></i>
         <span>Dashboard</span></Link>
 </li>
-
 <hr className="sidebar-divider"/>
 
 <div className="sidebar-heading">
-    Interface
+    Interfaces
 </div>
 
 <div className="nav-item">
-    <Link to='/student' className="nav-link">
+    <Link to='/studentCreates' className="nav-link">
         <i className="fas  fa-address-book"></i>
         <span className='student' >Student and Application Management</span>
     </Link>
-    
 </div>
 
 <div className="nav-item">
@@ -91,7 +147,16 @@ function SideBar() {
     </Link>
 </div>
 
+<div>
+<Button onClick={()=>navigate('/login')+logout()} variant='danger' style={{paddingBottom:'9px',display:'flex',position:'absolute',marginLeft:'70px'}}>Logout</Button>
+</div>
+
 </ul>
+{/* {
+    options.filter((option)=>option.role.includes(role)).map((e)=>{
+        return <Nav.Link href={e.path}>{e.value}</Nav.Link>
+    })
+} */}
   </>
 }
 

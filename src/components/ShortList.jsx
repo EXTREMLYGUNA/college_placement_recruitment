@@ -20,7 +20,7 @@ function ShortList() {
       <h1>User Interface Management</h1>
       <nav className='card' >
                <div className='details'>
-                    <div><Link to='/view'       className='all'>VIEW & EDIT  </Link></div>
+                    <div><Link to='/interface/:id'       className='all'>VIEW & EDIT  </Link></div>
                     <div><Link to='/shortlist'  className='all'>SHORTLIST    </Link>
                     <div className="d-sm-flex align-items-center justify-content-between mb-4 btn btn-warning">
               <h1 className="h3 mb-0 text-black-100" style={{color:"white"}} >Short List</h1>

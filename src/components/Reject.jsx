@@ -19,7 +19,7 @@ function Reject() {
       <h1>User Interface Management</h1>
       <nav className='card' >
                <div className='details'>
-                    <div><Link to='/view'       className='all'>VIEW & EDIT  </Link></div>
+                    <div><Link to='/interface/:id'       className='all'>VIEW & EDIT  </Link></div>
                     <div><Link to='/shortlist'  className='all'>SHORTLIST    </Link></div>
                     <div><Link to='/reject'     className='all'>REJECT       </Link>
                     <div className="d-sm-flex align-items-center justify-content-between mb-4 btn btn-danger">

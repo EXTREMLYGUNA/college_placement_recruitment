@@ -16,6 +16,10 @@ import IntegrationWithAcademicRecords from './components/Integration with Academ
 import ViewAndEdit from './components/ViewAndEdit'
 import ShortList from './components/ShortList'
 import Reject from './components/Reject'
+import Login from './components/Login'
+import Signup from './components/Signup'
+import ProtectedRoutes from './service/protectedRoutes'
+import AdminGuard from './service/adminGuard'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = React.createContext();
@@ -25,7 +29,8 @@ function App() {
         id:1,
         name:"Guna",
         email:'guna@gmail.com',
-        birth:"14/12/1999",
+        birth:"1999-12-14",
+        mobile:6123457890,
         age:25,
         address:'Vellore',
         resume:'C:/fakepath/resume1.jpg',
@@ -36,7 +41,8 @@ function App() {
         id:2,
         name:"Rajesh",
         email:'rajesh@gmail.com',
-        birth:"28/07/2000",
+        birth:"2000-007-28",
+        mobile:9123457554,
         age:"24",
         address:'Gudiyattam',
         resume:'C:/fakepath/resume2.jpeg',
@@ -47,7 +53,8 @@ function App() {
         id:3,
         name:"Sesha",
         email:'sesha@gmail.com',
-        birth:"25/08/1999",
+        birth:"1999-08-25",
+        mobile:8123458520,
         age:"25",
         address:'Chennai',
         resume:'C:/fakepath/resume3.pdf',
@@ -58,7 +65,8 @@ function App() {
         id:4,
         name:"Geetha",
         email:'geetha@gmail.com',
-        birth:"27/10/1997",
+        birth:"1997-10-27",
+        mobile:8123454521,
         age:"23",
         address:'Thirunelvali',
         resume:'C:/fakepath/resume4.pdf',
@@ -69,7 +77,8 @@ function App() {
         id:5,
         name:"Piriya",
         email:'piriya@gmail.com',
-        birth:"05/05/2001",
+        birth:"2001-05-05",
+        mobile:9223457785,
         age:"24",
         address:'Madurai',
         resume:'C:/fakepath/resume5.pdf',
@@ -80,29 +89,105 @@ function App() {
  
   return <div id = "wrapper">
   
-  <BrowserRouter>
-  <SideBar/> 
+  <BrowserRouter> 
+  <SideBar/>
   <UserContext.Provider value={{user,setUser}} >
-  <Routes>
-    <Route path = '/' element = {<Dashboard/>}/>
-    <Route path = '/dashboard' element = {<Dashboard/>}/>
-    <Route path='/student' element={<StudentAndAppplication/>}></Route>
-    <Route path='/schedule' element={<InterviewScheduling/>} ></Route>
-    <Route path='/company' element={<CompanyCoordination/>} ></Route>
-    <Route path='/placement' element={<PlacementDrivesManagement/>} ></Route>
-    <Route path='/status' element={<RecruitmentStatusTracking/>} ></Route>
-    <Route path='/records' element={<IntegrationWithAcademicRecords/>} ></Route>
-    <Route path = "/database" element = {<CompanyDatabaseIntegration/>}/>
-    <Route path = '/interface/:id' element = {<UserInterface/>} />
-    <Route path = '/viewEdit/:id' element = {<ViewAndEdit/>} />
-    <Route path = '/shortlist' element = {<ShortList/>} />
-    <Route path = '/reject' element = {<Reject/>} />
-    <Route path='/reports' element={<ReportsAndAnalytics/>} ></Route>
-    <Route path='*' element={<Navigate to='/' />} ></Route>
+  <Routes >  
+ 
+    <Route path='/login'                      element = { <Login/>} ></Route>
+
+    <Route path='/signup'                     element = { <Signup/>} ></Route>
+
+    <Route path ='/'                 element = { 
+      <ProtectedRoutes>
+        <Dashboard/>
+        </ProtectedRoutes> 
+      }></Route>
+
+    <Route path='/studentCreates'             element = { 
+      <ProtectedRoutes>
+      <StudentAndAppplication/>
+      </ProtectedRoutes> 
+    }></Route>
+
+    <Route path='/schedule'                   element = { 
+      <ProtectedRoutes>
+      <InterviewScheduling/>
+      </ProtectedRoutes>
+      }></Route>
+
+    <Route path='/company'                    element = { 
+      <ProtectedRoutes>
+        <AdminGuard>
+        <CompanyCoordination/>
+        </AdminGuard>
+      </ProtectedRoutes>
+      } ></Route>
+
+    <Route path='/placement'                  element = { 
+      <ProtectedRoutes>
+      <AdminGuard>
+      <PlacementDrivesManagement/>
+      </AdminGuard>
+
+    </ProtectedRoutes>} ></Route>
+    <Route path='/status'                     element = { 
+      <ProtectedRoutes>
+      <RecruitmentStatusTracking/>
+    </ProtectedRoutes>} ></Route>
+
+    <Route path='/records'                    element = { 
+      <ProtectedRoutes>
+      <AdminGuard>
+      <IntegrationWithAcademicRecords/>
+      </AdminGuard>
+    </ProtectedRoutes>} ></Route>
+
+    <Route path = "/database"                 element = { 
+      <ProtectedRoutes>
+      <AdminGuard>
+      <CompanyDatabaseIntegration/>
+      </AdminGuard>
+    </ProtectedRoutes>}/>
+
+    <Route path = '/interface/:id' element = { 
+      <ProtectedRoutes>
+        <UserInterface/>
+      </ProtectedRoutes>
+    } />
+
+    <Route path = '/viewEdit/:id'             element = { <ViewAndEdit/> } />
+
+    <Route path = '/shortlist'                element = { 
+      <ProtectedRoutes>
+        <AdminGuard>
+        <ShortList/>
+        </AdminGuard>
+      </ProtectedRoutes>
+     } />
+
+    <Route path = '/reject'                   element = { 
+      <ProtectedRoutes>
+        <AdminGuard>
+        <Reject/>
+        </AdminGuard>
+      </ProtectedRoutes>
+    } />
+
+    <Route path='/reports'                    element={
+      <ProtectedRoutes>
+      <AdminGuard>
+      <ReportsAndAnalytics/>
+      </AdminGuard>
+      </ProtectedRoutes>
+      } ></Route>
+
+    <Route path='*'                           element={<Navigate to='/login' />} ></Route>
+  
   </Routes>
   </UserContext.Provider>
   </BrowserRouter>
-    
+
   </div>
 }
  

@@ -7,8 +7,6 @@ import { findIndexById } from '../helper.js';
 import { useNavigate } from 'react-router-dom';
 import {UserContext} from '../App.jsx';
 import toast from 'react-hot-toast'
-// import ApiRoutes from '../utils/apiRoutes.jsx';
-// import api from '../service/apiService.jsx';
 
 function RecruitmentStatusTracking() {
   let {user,setUser} = useContext(UserContext)
@@ -19,8 +17,7 @@ function RecruitmentStatusTracking() {
     {
         user.splice(index,1)
         setUser([...user])
-        toast.error("Deleted successfully")
-        navigate('/reject')
+        toast.success("Deleted successfully")
     }
     else
     {
@@ -29,20 +26,6 @@ function RecruitmentStatusTracking() {
 }
 
 let navigate = useNavigate()
-
-// let getData = async()=>{
-//   try {
-//     const {path,authenticate} = ApiRoutes.GET_ALL_USERS
-//     let response = await api.get(path,{authenticate})
-//     setUser(response.data)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// useEffect(()=>{
-//   getData()
-// },[])
   
   return (
     <div>
@@ -56,7 +39,8 @@ let navigate = useNavigate()
                     <th style={{color:"red"}} >S.No</th>
                     <th style={{color:"red"}} >Name</th>
                     <th style={{color:"red"}} >Email</th>
-                    <th style={{color:"red"}} >Date Of Birth</th>
+                    <th style={{color:"red",width:"120px"}} >Date Of Birth</th>
+                    <th style={{color:"red"}} >Mobile Number</th>
                     <th style={{color:"red"}} >Age</th>
                     <th style={{color:"red"}} >Address</th>
                     <th style={{color:"red"}} >Resume</th>
@@ -74,15 +58,16 @@ let navigate = useNavigate()
                         <td>{e.name}</td>
                         <td>{e.email}</td>
                         <td>{e.birth}</td>
+                        <td>{e.mobile}</td>
                         <td>{e.age}</td>
                         <td>{e.address}</td>
                         <td>{e.resume}</td>
                         <td>{e.gender}</td>
                         <td>{e.status?<><p style={{color:"green"}} >Active</p></> : <><p style={{color:"red"}} >In-Active</p></> }</td>
                         <td style={{display:"flex"}} >
-                            <Button variant='white' onClick={()=>navigate(`/shortlist`)} ><img title='shortlist' src='https://img.icons8.com/?size=100&id=70933&format=png&color=000000' style={{width:'40px',height:'40px'}}/></Button>
-                            &nbsp;&nbsp;
                             <Button variant='white' onClick={()=>navigate(`/interface/${e.id}`)} ><img title='view and edit' src='https://icon-library.com/images/icon-view/icon-view-11.jpg' style={{width:'40px',height:'40px'}}/></Button>
+                            &nbsp;&nbsp;
+                            <Button variant='white' onClick={()=>navigate(`/shortlist`)} ><img title='shortlist' src='https://img.icons8.com/?size=100&id=70933&format=png&color=000000' style={{width:'40px',height:'40px'}}/></Button>
                             &nbsp;&nbsp;
                             <Button variant='white' onClick={()=>handledelete(e.id)}><img title='delete' src='https://icon-library.com/images/remove-icon/remove-icon-21.jpg' style={{width:'40px',height:'40px'}} /></Button>
                         </td>
