@@ -1,13 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React,{useState,useEffect} from 'react'
+import React from 'react'
 import TopBar from './TopBar'
-import toast from 'react-hot-toast';
 import Feed from './Feed.jsx';
-import api from '../service/apiService.jsx';
-import ApiRoutes from '../utils/apiRoutes.jsx';
-import  Button  from 'react-bootstrap/button';
-import { useNavigate } from 'react-router-dom';
-import Form from 'react-bootstrap/form'
 
 function StudentAndAppplication() {
 // let [data,setData] = useState()
@@ -82,8 +76,6 @@ function StudentAndAppplication() {
       return <div>
           <TopBar/>
            <h1>Student And Appplication Management</h1>
-           
-           
            <Feed/>
           
       </div>
