@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React,{useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
@@ -11,10 +11,11 @@ import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   let navigate = useNavigate()
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSignup = async (e)=>{
     e.preventDefault();
-    
+      setIsSubmitting(true)
       const formData = new FormData(e.currentTarget)
       const data = {}
       for(let [key,value] of formData.entries())
@@ -22,7 +23,7 @@ function Signup() {
       console.log(data)
     
     let response = await api.post(ApiRoutes.SIGNUP.path,data,{
-      autheticate:ApiRoutes.SIGNUP.authenticate
+      authenticate:ApiRoutes.SIGNUP.authenticate
       
     })
     console.log(response)
@@ -102,8 +103,8 @@ function Signup() {
         </Form.Text>
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Signup
+      <Button variant="primary" type="submit" disabled={isSubmitting}>
+      {isSubmitting ? 'Loading...' : 'Signup'}
       </Button>
     </Form>
     </div>

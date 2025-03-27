@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
@@ -11,10 +11,12 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
     let navigate = useNavigate()
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleLogin = async (e)=>{
         e.preventDefault();
         try {
+            setIsSubmitting(true)
             const formData = new FormData(e.currentTarget)
             const data = {}
             for(let [key,value] of formData.entries()){
@@ -57,8 +59,8 @@ function Login() {
           <p>Don't share your password !</p>
         </Form.Text>
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Login
+      <Button variant="primary" type="submit" disabled={isSubmitting}>
+      {isSubmitting ? 'Loading...' : 'Login'}
       </Button>
     </Form>
     </div>

@@ -1,124 +1,92 @@
 /* eslint-disable no-unused-vars */
-import React,{useState,useContext,useEffect} from 'react'
+import React,{useState,useEffect} from 'react'
 import TopBar from './TopBar'
-import Form from 'react-bootstrap/Form'
-import { useNavigate } from 'react-router-dom';
-import {UserContext} from '../App.jsx';
-import Button from 'react-bootstrap/Button'
 import toast from 'react-hot-toast';
-import ApiRoutes from '../utils/apiRoutes.jsx';
+import Feed from './Feed.jsx';
 import api from '../service/apiService.jsx';
-
+import ApiRoutes from '../utils/apiRoutes.jsx';
+import  Button  from 'react-bootstrap/button';
+import { useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/form'
 
 function StudentAndAppplication() {
-  let {user,setUser} = useContext(UserContext)
+// let [data,setData] = useState()
+//     const loadData = async()=>{
+//         try {
+//               const {path,authenticate} = ApiRoutes.GET_ALL_USERS
+//               let response =await api.post(path,{authenticate})
+//               console.log(response)
+//               setData(response.data)
+//             } catch (error) {
+//               if(error.response.status===401)
+//                 toast.error(error.response.message)
+//             }
+//     }
 
-  const [name,setName] = useState("")
-  const [email,setEmail] = useState('')
-  const [birth,setBirth] = useState("")
-  const [mobile,setMobile]= useState("")
-  const [age,setAge] = useState('')
-  const [address,setAddress] = useState('')
-  const [resume,setResume] = useState('')
-  const [gender,setGender] = useState('')
-  const [status,setStatus] = useState('')
-
-  const navigate = useNavigate()
-
-  
-
-  //   const loadData = async ()=>{
-  //   try {
-  //     const {path,authenticate} = ApiRoutes.GET_ALL_USERS
-  //     let response =await api.post(path,{authenticate})
+//     useEffect(()=>{
+//         loadData()
+//       })
       
-  //     setUser(response.data)
-  //   } catch (error) {
-  //     if(error.response.status===401)
-  //       toast.error(error.response.message)
-  //   }
-  // }
+// let navigate = useNavigate()
 
-  // useEffect(()=>{
-  //   loadData()
-  // })
+//   const handleSubmit = async (e)=>{
+//     e.preventDefault();
+    
+//       const formData = new FormData(e.currentTarget)
+//       const data = {}
+//       for(let [key,value] of formData.entries())
+//         data[key] = value;
+//       console.log(data)
+    
+//     let response = await api.post(ApiRoutes.GET_ALL_USERS.path,data,{
+//       authenticate:ApiRoutes.GET_ALL_USERS.authenticate
+      
+//     })
+//     console.log(response)
+//     toast.success(response.message)
+//     navigate('/status')
+//   }
 
-  const handleSubmit = () =>{
-    const data = {name,email,birth,mobile,age,address,resume,gender,status} 
-    data.id = user.length?user[user.length-1].id+1 : 1
-    user.push(data)
-    setUser([...user])
-    toast.success("Created successfully")
-    navigate('/status')     
-}
+// const navigate = useNavigate(); // Added missing hook
+// const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // {
-  //   user.map((e)=>{
+
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+  
+//   try {
+//     const formData = new FormData(e.currentTarget);
+//     setIsSubmitting(true);
+//     // If your API expects FormData (especially for file upload), send formData directly
+//     const response = await api.post(
+//       ApiRoutes.GET_ALL_USERS.path, 
+//       formData, // Send FormData directly if API accepts it
+//       {
+//         authenticate: ApiRoutes.GET_ALL_USERS.authenticate,
+//         headers: {
+//           'Content-Type': 'multipart/form-data' // Important for file upload
+//         }
+//       }
+//     );
+    
+//     console.log(response);
+//     toast.success(response.message);
+//     navigate('/status');
+//   } catch (error) {
+//     console.error('Submission failed:', error);
+//     toast.error(error.response?.data?.message || 'Application failed');
+//   }
+// }
+
+
       return <div>
           <TopBar/>
-          <h1>Student And Appplication Management</h1>
-          <div id="content-wrapper" className="d-flex flex-column" style={{display:'inline-block', width:'1000px'}}>
-              <div id="content">
-                  <div className="container-fluid">
-                       <div className="row">
-                           <div className="col-lg-7">
-                               <div className="p-5">
-                                     <Form >
-                                        <Form.Group className="mb-3" >
-                                          <Form.Label>Name</Form.Label>
-                                          <Form.Control type="text" id='name' name='name' value={name} placeholder="Enter your name" onChange={(e)=>setName(e.target.value)} required/>
-                                        </Form.Group> 
-                                        <Form.Group className="mb-3" >
-                                          <Form.Label>Email</Form.Label>
-                                          <Form.Control type="email" id='email' name='email' value={email} placeholder="Enter your email" onChange={(e)=>setEmail(e.target.value)} required/>
-                                        </Form.Group> 
-                                        <Form.Group className="mb-3" >
-                                          <Form.Label>Date Of Birth</Form.Label>
-                                          <Form.Control type="date" id='birth' name='birth' value={birth} onChange={(e)=>setBirth(e.target.value)} required />
-                                        </Form.Group>       
-                                        <Form.Group className="mb-3">
-                                          <Form.Label>Mobile Number</Form.Label>
-                                          <Form.Control type="number" id='mobile' placeholder="Enter your mobile number" name='mobile' value={mobile} onChange={(e)=>setMobile(e.target.value)} required />
-                                        </Form.Group>
-                                        <Form.Group className="mb-3" >
-                                          <Form.Label>Age</Form.Label>
-                                          <Form.Control type="number" id='age' placeholder="Enter your Age" name='age' value={age} onChange={(e)=>setAge(e.target.value)} required/>
-                                        </Form.Group>     
-                                        <Form.Group className="mb-3" >
-                                          <Form.Label>Address</Form.Label>
-                                          <Form.Control type="text" id='address' placeholder="Enter your address" name='address' value={address} onChange={(e)=>setAddress(e.target.value)} required/>
-                                        </Form.Group>       
-                                        <Form.Group className="mb-3" >
-                                          <Form.Label>Upload resume</Form.Label>
-                                          <Form.Control type="file" id='resume' name='resume' value={resume} onChange={(e)=>setResume(e.target.value)} required/>
-                                        </Form.Group>
-                                        <Form.Group className="mb-3" >
-                                        <Form.Label>Gender</Form.Label>
-                                            <Form.Select defaultValue={gender} onChange={(e)=>setGender(e.target.value)} >
-                                            <option value={'null'}   >Select Gender</option>
-                                            <option value={'Male'}   >Male         </option>
-                                            <option value={'Female'} >Female       </option>
-                                            <option value={'Others'} >Others       </option>
-                                            </Form.Select> 
-                                          </Form.Group> 
-                                        <Form.Group className="mb-3" >
-                                        <Form.Label>Status</Form.Label>
-                                           <Form.Check type="checkbox" id='Active' checked={status}   label="Active"  name='Status' value={"Active"   } onChange={(e)=>setStatus(e.target.checked)} /> 
-                                        </Form.Group> 
-                                        <Button variant="primary" onClick = {()=>handleSubmit()}>
-                                          Apply
-                                        </Button>
-                                     </Form>
-                              
-                                  </div> 
-                               </div>
-                         </div>
-                     </div>     
-                </div>
-           </div>
+           <h1>Student And Appplication Management</h1>
+           
+           
+           <Feed/>
+          
       </div>
-  //   })
-  // }
   
   
 } 

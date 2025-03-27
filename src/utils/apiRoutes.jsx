@@ -9,12 +9,12 @@ const ApiRoutes = {
     },
     GET_ALL_USERS:{
         path:'/application/create',
-        authenticate:true
+        authenticate:false
     },
     GET_ALL_LOGIN:{
         path:'/student/studentsAll',
         authenticate:true
     },
 }
-
+ 
 export default ApiRoutes
