@@ -1,6 +1,5 @@
 /// eslint-disable-next-line no-unused-vars
 import React,{useState} from 'react'
-import SideBar from './components/SideBar'
 import {BrowserRouter , Routes, Route} from 'react-router-dom'
 import UserInterface from './components/UserInterface'
 import CompanyDatabaseIntegration from './components/Company Database Integration'
@@ -20,6 +19,8 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import ProtectedRoutes from './service/protectedRoutes'
 import AdminGuard from './service/adminGuard'
+import Recruitment from './service/Recruitment'
+import SideBar from './components/SideBar'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = React.createContext();
@@ -86,11 +87,14 @@ function App() {
         status:true
       },
     ])
+    
  
-  return <div id = "wrapper">
+  return <>
+  <div className='wrappers'>
+  <div id = "wrapper">
+
   
   <BrowserRouter> 
-  <SideBar/>
   <UserContext.Provider value={{user,setUser}} >
   <Routes >  
  
@@ -98,7 +102,15 @@ function App() {
 
     <Route path='/signup'                     element = { <Signup/>} ></Route>
 
-    <Route path ='/'                 element = { 
+    <Route path='/welcome'                      element = { <SideBar/>}></Route>
+    
+    <Route path='/'                           element = { 
+      <ProtectedRoutes>
+        <Recruitment><SideBar/></Recruitment>
+      </ProtectedRoutes>
+     } ></Route>
+
+    <Route path ='/dashboard'                 element = { 
       <ProtectedRoutes>
         <Dashboard/>
         </ProtectedRoutes> 
@@ -189,6 +201,7 @@ function App() {
   </BrowserRouter>
 
   </div>
-}
+  </div>
+  </>}
  
 export default App

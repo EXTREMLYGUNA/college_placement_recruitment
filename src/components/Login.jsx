@@ -8,6 +8,7 @@ import api from '../service/apiService'
 import ApiRoutes from '../utils/apiRoutes';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import SideBar from './SideBar';
 
 function Login() {
     let navigate = useNavigate()
@@ -39,7 +40,10 @@ function Login() {
       sessionStorage.clear()
     },[])
 
+
+
   return (<>
+  
     <div className='login-wrapper'>
         <h3 className='wrapper' >Welcome to Student application portal</h3>
         <p>Don't have an account ? Register <Link to='/signup' style={{textDecoration:"none"}} >now</Link></p>
@@ -59,7 +63,7 @@ function Login() {
           <p>Don't share your password !</p>
         </Form.Text>
       </Form.Group>
-      <Button variant="primary" type="submit" disabled={isSubmitting}>
+      <Button variant="primary" type="submit" disabled={isSubmitting} >
       {isSubmitting ? 'Loading...' : 'Login'}
       </Button>
     </Form>

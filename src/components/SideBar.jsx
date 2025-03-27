@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/esm/Button'
 import { Link } from 'react-router-dom'
 import useLogout from '../service/useLogout'
 import { useNavigate } from 'react-router-dom'
+import Login from './Login'
 
 function SideBar() {
     let logout = useLogout()
@@ -61,10 +62,12 @@ function SideBar() {
 //     },
 // ]
 
-  return <>
-    <ul className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar" style={{display:"flex",position:"sticky"}}>
 
-<Link to="/dashboard" className="sidebar-brand d-flex align-items-center justify-content-center" >
+  return <>
+  <div className='tortle' >
+    <ul className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion " id="accordionSidebar" style={{display:"flex",position:"sticky"}}>
+
+<Link to="/" className="sidebar-brand d-flex align-items-center justify-content-center" >
     <div className="sidebar-brand-icon rotate-n-15">
         <i className="fas fa-graduation-cap"></i>
     </div>
@@ -74,7 +77,7 @@ function SideBar() {
 <hr className="sidebar-divider my-0"/>
  
 <li className="nav-item active">
-    <Link to='/' className="nav-link" >
+    <Link to='/dashboard' className="nav-link" >
         <i className="fas fa fa-briefcase"></i>
         <span>Dashboard</span></Link>
 </li>
@@ -152,11 +155,7 @@ function SideBar() {
 </div>
 
 </ul>
-{/* {
-    options.filter((option)=>option.role.includes(role)).map((e)=>{
-        return <Nav.Link href={e.path}>{e.value}</Nav.Link>
-    })
-} */}
+</div>
   </>
 }
 

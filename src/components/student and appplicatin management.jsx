@@ -2,6 +2,7 @@
 import React from 'react'
 import TopBar from './TopBar'
 import Feed from './Feed.jsx';
+import SideBar from './SideBar.jsx';
 
 function StudentAndAppplication() {
 // let [data,setData] = useState()
@@ -73,13 +74,14 @@ function StudentAndAppplication() {
 // }
 
 
-      return <div>
+      return <><SideBar/>
+      <div>
           <TopBar/>
            <h1>Student And Appplication Management</h1>
            <Feed/>
           
       </div>
-  
+      </>
   
 } 
 

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import TopBar from './TopBar'
+import SideBar from './SideBar'
 
 function InterviewScheduling() {
 
@@ -47,7 +48,7 @@ setInterval(()=>{
 timer.innerHTML = `<b style="color:red;">Offers end in</b>  ${Hour}<sub> Hour</sub> : ${Minutes}<sub>Minutes</sub> : ${Seconds}<sub>Seconds</sub> : ${MilliSeconds}<sub>MilliSeconds</sub>`
 },10)
 
-  return (<>
+  return (<><SideBar/>
     <div className='p-3'>
       <TopBar/>
       <h1>Interview Scheduling</h1>

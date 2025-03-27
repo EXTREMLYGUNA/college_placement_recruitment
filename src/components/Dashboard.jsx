@@ -3,13 +3,14 @@ import React ,{useContext}from 'react'
 import TopBar from './TopBar'
 import Table from 'react-bootstrap/esm/Table'
 import {UserContext} from '../App.jsx';
+import SideBar from './SideBar.jsx';
 
 
 function Dashboard() {
   let {user,setUser} = useContext(UserContext)
 
 
-  return (
+  return (<><SideBar/>
     <div className='p-3'>
       <TopBar/>
       <h1>Dashboard</h1>
@@ -42,7 +43,7 @@ function Dashboard() {
           </div>
              </div>
     </div>
-  )
+    </>)
 }
 
 export default Dashboard

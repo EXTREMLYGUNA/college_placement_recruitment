@@ -119,3 +119,14 @@ h2 >sub{
   height: 335px;
   padding: 10px;
 }
+.welcome{
+  margin-left: 200px;
+  margin-top: 100px;
+  color: red;
+  display: flex;
+  position: absolute;
+}
+.recruit{
+  margin-left: 220px;
+  margin-top: 50px;
+}

@@ -5,6 +5,7 @@ import Table from 'react-bootstrap/Table';
 import api from '../service/apiService';
 import toast from 'react-hot-toast';
 import ApiRoutes from '../utils/apiRoutes';
+import SideBar from './SideBar';
 
 function CompanyDatabaseIntegration() {
   let [data,setData] = useState()
@@ -24,7 +25,7 @@ function CompanyDatabaseIntegration() {
     getData()
   })
 
-  return (
+  return (<><SideBar/>
     <div style={{marginLeft:"30px"}} >
       <TopBar/>
       <h1>Company Data base Integration</h1>
@@ -56,7 +57,7 @@ function CompanyDatabaseIntegration() {
       </tbody>
     </Table>
     </div> 
-  )
+    </>)
 }
 
 export default CompanyDatabaseIntegration

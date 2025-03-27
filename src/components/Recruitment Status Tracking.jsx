@@ -7,6 +7,7 @@ import { findIndexById } from '../helper.js';
 import { useNavigate } from 'react-router-dom';
 import {UserContext} from '../App.jsx';
 import toast from 'react-hot-toast'
+import SideBar from './SideBar.jsx';
 
 function RecruitmentStatusTracking() {
   let {user,setUser} = useContext(UserContext)
@@ -27,7 +28,7 @@ function RecruitmentStatusTracking() {
 
 let navigate = useNavigate()
   
-  return (
+  return (<><SideBar/>
     <div>
       <TopBar/>
       <h1>Recruitment Status Tracking</h1>
@@ -82,7 +83,7 @@ let navigate = useNavigate()
           </div>
              </div>
     </div>
-  )
+    </>)
 }
 
 export default RecruitmentStatusTracking

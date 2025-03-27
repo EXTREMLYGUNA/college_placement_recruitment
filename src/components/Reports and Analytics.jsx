@@ -5,12 +5,13 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { LineChart } from '@mui/x-charts/LineChart';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+import SideBar from './SideBar';
 
 
 
 function ReportsAndAnalytics() {
   const navigate = useNavigate()
-  return (
+  return (<><SideBar/>
     <div style={{paddingLeft:"20px"}} >
       <TopBar/>
       <Button variant='primary' onClick={()=>navigate('/status')} >Back</Button>
@@ -46,7 +47,7 @@ function ReportsAndAnalytics() {
       </div>
       </div>
     </div>
-  )
+    </>)
 }
 
 export default ReportsAndAnalytics

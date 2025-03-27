@@ -8,6 +8,7 @@ import {UserContext} from '../App.jsx';
 import { findIndexById } from '../helper.js';
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom';
+import SideBar from './SideBar.jsx';
 
 function UserInterface() {
   let {user,setUser} = useContext(UserContext)
@@ -54,7 +55,7 @@ function UserInterface() {
           getData()
       },[])
   
-  return (
+  return (<><SideBar/>
     <div className="find">
       <TopBar/>
       <Button variant='primary' onClick={()=>navigate('/status')} >Back</Button>
@@ -128,7 +129,7 @@ function UserInterface() {
       <hr/>
    </nav> 
     </div>
-  )
+    </> )
 }
 
 export default UserInterface
