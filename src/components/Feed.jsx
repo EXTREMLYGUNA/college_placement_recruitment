@@ -1,7 +1,7 @@
  /* eslint-disable no-unused-vars */
 import React,{useState,useContext} from 'react'
 import  Form  from 'react-bootstrap/Form'
-import  Button  from 'react-bootstrap/button'
+import  Button  from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom';
 import {UserContext} from '../App.jsx';
 import toast from 'react-hot-toast';
