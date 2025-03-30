@@ -21,6 +21,7 @@ import ProtectedRoutes from './service/protectedRoutes'
 import AdminGuard from './service/adminGuard'
 import Recruitment from './service/Recruitment'
 import SideBar from './components/SideBar'
+import CompanyDatabaseUsers from './components/Company Database Users'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = React.createContext();
@@ -155,11 +156,14 @@ function App() {
       </AdminGuard>
     </ProtectedRoutes>} ></Route>
 
-    <Route path = "/database"                 element = { 
+    <Route path = "/database/loginData"                 element = { 
       <ProtectedRoutes>
-      <AdminGuard>
       <CompanyDatabaseIntegration/>
-      </AdminGuard>
+    </ProtectedRoutes>}/>
+
+    <Route path = "/database/userData"                 element = { 
+      <ProtectedRoutes>
+      <CompanyDatabaseUsers/>
     </ProtectedRoutes>}/>
 
     <Route path = '/interface/:id' element = { 

@@ -65,7 +65,7 @@ function SideBar() {
 
   return <>
   <div className='tortle' >
-    <ul className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion " id="accordionSidebar" style={{display:"flex",position:"sticky"}}>
+    <ul className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion " id="accordionSidebar" style={{display:"flex",height:"100vw",position:'inherit'}}>
 
 <Link to="/" className="sidebar-brand d-flex align-items-center justify-content-center" >
     <div className="sidebar-brand-icon rotate-n-15">
@@ -130,11 +130,18 @@ function SideBar() {
 </div>
 
 <div className="nav-item">
-    <Link to='/database' className="nav-link">
+    <Link to='/database/loginData' className="nav-link">
         <i className="fas fa-database"></i>
-        <span className='student'>Company Database Integration</span>
+        <span className='student'>Company Database Integration <b style={{color:'red'}}>Login Data</b></span>
     </Link>
 </div> 
+
+<div className="nav-item">
+    <Link to='/database/userData' className="nav-link">
+        <i className="fas fa-database"></i>
+        <span className='student'>Company Database Integration <b style={{color:'red'}}>Users Data</b></span>
+    </Link>
+</div>
 
 <div className="nav-item">
     <Link to='/interface/:id' className="nav-link">

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import TopBar from './TopBar'
 import Table from 'react-bootstrap/Table';
-import api from '../service/apiService';
+import {api} from '../service/apiService';
 import toast from 'react-hot-toast';
 import ApiRoutes from '../utils/apiRoutes';
 import SideBar from './SideBar';
@@ -56,7 +56,8 @@ function CompanyDatabaseIntegration() {
         }
       </tbody>
     </Table>
-    </div> 
+    </div>
+    
     </>)
 }
 

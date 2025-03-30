@@ -4,11 +4,10 @@ import React,{useEffect,useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
-import api from '../service/apiService'
+import {api} from '../service/apiService'
 import ApiRoutes from '../utils/apiRoutes';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import SideBar from './SideBar';
 
 function Login() {
     let navigate = useNavigate()

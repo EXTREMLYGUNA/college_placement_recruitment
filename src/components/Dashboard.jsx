@@ -1,13 +1,30 @@
 /* eslint-disable no-unused-vars */
-import React ,{useContext}from 'react'
+import React ,{useContext, useEffect, useState}from 'react'
 import TopBar from './TopBar'
 import Table from 'react-bootstrap/esm/Table'
 import {UserContext} from '../App.jsx';
 import SideBar from './SideBar.jsx';
+import ApiRoutes from '../utils/apiRoutes.jsx';
+import { api1 } from '../service/apiService.jsx';
+import toast from 'react-hot-toast';
 
 
 function Dashboard() {
-  let {user,setUser} = useContext(UserContext)
+  let [data,setData] = useState()
+  let getData = async () =>{
+    try {
+      const {path,authenticate} = ApiRoutes.COLLECT_ALL_USERS
+      let response = await api1.get(path,{authenticate})
+
+      setData(response.data)
+    } catch (error) {
+      if(error.response.status===401)
+      toast.error(error.response.message)
+    }
+  }
+  useEffect(()=>{
+      getData()
+    })
 
 
   return (<><SideBar/>
@@ -22,17 +39,19 @@ function Dashboard() {
             <Table striped bordered hover style={{height:'100px'}}>
                 <thead>
                 <tr >
-                    <th>S.No</th>
-                    <th>Name</th>
+                    <th style={{color:"red"}} >Unique id</th>
+                    <th style={{color:"red"}} >Name</th>
+                    <th style={{color:"red"}} >Email</th>
                 </tr>
                 </thead>
                 <tbody>
                 {
-                    user.map((e)=>{
+                    data?.map((e)=>{
                         return <>
                         <tr data={e} key={e.i}>
-                        <td>{e.id}</td>
-                        <td>{e.name}</td>
+                        <td style={{color:"blue"}} >{e.id}</td>
+                        <td style={{color:"green"}} >{e.name}</td>
+                        <td style={{color:"green"}} >{e.email}</td>
                         </tr>
                         </>
                     }) 

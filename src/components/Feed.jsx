@@ -54,7 +54,7 @@ function Feed() {
                                         <Form.Group className="mb-3" >
                                           <Form.Label>Email</Form.Label>
                                           <Form.Control type="email" id='email' name='email' value={email} placeholder="Enter your email" onChange={(e)=>setEmail(e.target.value)} required/>
-                                        </Form.Group> 
+                                        </Form.Group>  
                                         <Form.Group className="mb-3" >
                                           <Form.Label>Date Of Birth</Form.Label>
                                           <Form.Control type="date" id='birth' name='birth' value={birth} onChange={(e)=>setBirth(e.target.value)} required />
@@ -88,6 +88,7 @@ function Feed() {
                                         <Form.Label>Status</Form.Label>
                                            <Form.Check type="checkbox" id='Active' checked={status}   label="Active"  name='Status' value={"Active"   } onChange={(e)=>setStatus(e.target.checked)} /> 
                                         </Form.Group>
+                                        
                                         <Button variant="primary" type='submit' disabled={isSubmitting} onClick={()=>handleSubmit()}>
                                           {isSubmitting?'Submitting...':'Apply'}
                                         </Button>
