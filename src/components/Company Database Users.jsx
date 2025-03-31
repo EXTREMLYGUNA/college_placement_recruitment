@@ -12,6 +12,7 @@ import { findIndexById } from '../helper';
 
 function CompanyDatabaseUsers() {
     let navigate = useNavigate()
+    const [isSubmitting,setIsSubmitting] = useState()
     let [data,setData] = useState()
   let getData = async () =>{
     try {
@@ -29,6 +30,33 @@ function CompanyDatabaseUsers() {
   useEffect(()=>{
     getData()
   })
+
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure you want to delete this user?')) {
+      return;
+    }
+    setIsSubmitting(true);
+    
+    try {
+      const response = await api1.delete(`${ApiRoutes.DELETE_USER.path}/${id}`,{
+          authenticate: ApiRoutes.DELETE_USER.authenticate});
+      
+      toast.success(response.data.message);
+      navigate('/database/userData');
+    } catch (error) {
+      console.error('Delete error:', {
+        status: error.response?.status,
+        data: error.response?.data,
+        message: error.message
+      });
+      toast.error(error.response?.data?.message || 'Failed to delete user');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+
+  
   return (<><SideBar/>
   <div style={{marginLeft:"30px"}} >
       <TopBar/>
@@ -68,9 +96,9 @@ function CompanyDatabaseUsers() {
               <td style={{color:"blue"}} >{e.userId}</td>
               <td>{e.status?<><p style={{color:"green"}} >Active</p></> : <><p style={{color:"red"}} >In-Active</p></> }</td>
               <td style={{display:"flex"}} >
-                            <Button variant='primary' onClick={()=>navigate(`/interface/:id`)} >EDIT</Button>
+                            <Button variant='primary' onClick={()=>navigate(`/application/editUser/:id`)} >EDIT</Button>
                             &nbsp;&nbsp;
-                            <Button variant='danger' >DELETE</Button>
+                            <Button variant='danger' onClick={handleDelete} disabled={isSubmitting} >{isSubmitting ? 'Deleting...' : 'DELETE'}</Button>
                             &nbsp;&nbsp;
                             <Button variant='warning' >SHORT LIST</Button>
                         </td>

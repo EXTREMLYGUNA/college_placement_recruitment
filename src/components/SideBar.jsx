@@ -9,59 +9,6 @@ import Login from './Login'
 function SideBar() {
     let logout = useLogout()
     let navigate = useNavigate()
-//     let options = [
-//         {
-//         value:"Dashboard",
-//         path:"/",
-//         role:["Student","Admin"]
-//     },
-//     {
-//         value:"Student and Application Management",
-//         path:"/",
-//         role:["Student","Admin"]
-//     },
-//     {
-//         value:"Interview Scheduling",
-//         path:"/",
-//         role:["Student","Admin"]
-//     },
-//     {
-//         value:"Company Coordination",
-//         path:"/",
-//         role:["Admin"]
-//     },
-//     {
-//         value:"Placement Drives Management",
-//         path:"/",
-//         role:["Admin"]
-//     },
-//     {
-//         value:"Recruitment Status Tracking",
-//         path:"/",
-//         role:["Student","Admin"]
-//     },
-//     {
-//         value:"Integration with Academic Records",
-//         path:"/",
-//         role:["Admin"]
-//     },
-//     {
-//         value:"Company Database Integration",
-//         path:"/",
-//         role:["Admin"]
-//     },
-//     {
-//         value:"User Interface",
-//         path:"/",
-//         role:["Student","Admin"]
-//     },
-//     {
-//         value:"Reports and Analytics",
-//         path:"/",
-//         role:["Admin"]
-//     },
-// ]
-
 
   return <>
   <div className='tortle' >

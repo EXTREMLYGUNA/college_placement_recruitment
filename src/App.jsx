@@ -91,7 +91,7 @@ function App() {
     
  
   return <>
-  <div className='wrappers'>
+  <div className='screen'>
   <div id = "wrapper">
 
   
@@ -172,7 +172,7 @@ function App() {
       </ProtectedRoutes>
     } />
 
-    <Route path = '/viewEdit/:id'             element = { <ViewAndEdit/> } />
+    <Route path = '/application/editUser/:id'             element = { <ViewAndEdit/> } />
 
     <Route path = '/shortlist'                element = { 
       <ProtectedRoutes>

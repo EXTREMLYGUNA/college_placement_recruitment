@@ -25,10 +25,12 @@ function UserInterface() {
 
     const navigate = useNavigate()
     const {id} = useParams()
+    const [isSubmitting,setIsSubmitting] = useState();
     
     let index = findIndexById(user,Number(id))
   
     const handleSubmit = () =>{
+          setIsSubmitting(true)
           const data = {id:Number(id),name,email,birth,mobile,age,address,resume,gender,status} 
           user.splice(index,1,data)
           setUser([...user])
@@ -62,7 +64,7 @@ function UserInterface() {
       <h1>User Interface</h1>
       <nav className='card'>
          <div className='details'>
-              <div><Link to='/editStudents/:id'           className='all'>VIEW & EDIT   </Link>
+              <div><Link to='/interface/:id'           className='all'>VIEW & EDIT   </Link><hr/>
               <div id="content-wrapper" className="d-flex flex-column" style={{display:'flex',width:'1000px'}}>
           <div id="content">
               <div className="container-fluid">
@@ -111,8 +113,8 @@ function UserInterface() {
                                     <Form.Label>Status</Form.Label>
                                        <Form.Check type="checkbox" id='Active' checked={status}   label="Active"  name='Status' value={"Active"   } onChange={(e)=>setStatus(e.target.checked)} /> 
                                     </Form.Group> 
-                                    <Button variant="primary" onClick = {()=>handleSubmit()}>
-                                      Update
+                                    <Button variant="primary" type="submit" disabled={isSubmitting} >
+                                    {isSubmitting ? 'Updating...' : 'Update'}
                                     </Button>
                                  </Form>
                           
@@ -126,7 +128,6 @@ function UserInterface() {
               <div><Link to='/shortlist'  className='all'>SHORT LIST</Link></div>
               <div><Link to='/reject'   className='all'>REJECT LIST          </Link></div>  
          </div>
-      <hr/>
    </nav> 
     </div>
     </> )
