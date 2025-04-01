@@ -15,6 +15,10 @@ const ApiRoutes = {
         path:'/application/getApplication',
         authenticate:true
     },
+    GET_USERS:{
+        path:'/application/getApplicationOne/:id',
+        authenticate:true
+    },
     GET_ALL_LOGIN:{
         path:'/student/studentsAll',
         authenticate:true

@@ -49,4 +49,7 @@ api1.interceptors.response.use((response)=>{
         return Promise.reject(error)
 }))
 
+
+
+
 export  {api,api1}

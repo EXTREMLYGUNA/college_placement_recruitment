@@ -31,25 +31,48 @@ function CompanyDatabaseUsers() {
     getData()
   })
 
-  const handleDelete = async () => {
+  const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this user?')) {
       return;
     }
     setIsSubmitting(true);
     
     try {
-      const response = await api1.delete(`${ApiRoutes.DELETE_USER.path}/${id}`,{
-          authenticate: ApiRoutes.DELETE_USER.authenticate});
+      
+      const response = await api1.delete(`${ApiRoutes.DELETE_USER.path}/${id}`,
+        {authenticate: ApiRoutes.DELETE_USER.authenticate,
+          headers:{
+            'Content-Type':'application/json',
+            'Accept': 'application/json'
+          }
+        },);
       
       toast.success(response.data.message);
       navigate('/database/userData');
     } catch (error) {
-      console.error('Delete error:', {
+      console.error('Detailed error:', {
+        url: error.config?.url,
+        method: error.config?.method,
         status: error.response?.status,
-        data: error.response?.data,
-        message: error.message
+        data: error.response?.data
       });
-      toast.error(error.response?.data?.message || 'Failed to delete user');
+      
+      // 4. Enhanced error handling
+      let errorMessage = 'Failed to delete user';
+      if (error.response) {
+        if (error.response.status === 404) {
+          errorMessage = 'User not found';
+        } else if (error.response.status === 401) {
+          errorMessage = 'Unauthorized - Please login again';
+          navigate('/login');
+        } else if (error.response.data?.message) {
+          errorMessage = error.response.data.message;
+        }
+      } else if (error.request) {
+        errorMessage = 'No response from server';
+      }
+      
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -83,7 +106,7 @@ function CompanyDatabaseUsers() {
       <tbody>
         {
           data?.map((e)=>{
-            return <tr key = {e.value} >
+            return <tr key = {e.id} >
               <td style={{color:"green"}} >{e.id}</td>
               <td>{e.name}</td>
               <td>{e.email}</td>
@@ -96,9 +119,9 @@ function CompanyDatabaseUsers() {
               <td style={{color:"blue"}} >{e.userId}</td>
               <td>{e.status?<><p style={{color:"green"}} >Active</p></> : <><p style={{color:"red"}} >In-Active</p></> }</td>
               <td style={{display:"flex"}} >
-                            <Button variant='primary' onClick={()=>navigate(`/application/editUser/:id`)} >EDIT</Button>
+                            <Button variant='primary' onClick={()=>navigate(`/application/editUser/${e.id}`)} >EDIT</Button>
                             &nbsp;&nbsp;
-                            <Button variant='danger' onClick={handleDelete} disabled={isSubmitting} >{isSubmitting ? 'Deleting...' : 'DELETE'}</Button>
+                            <Button variant='danger' onClick={()=>handleDelete(e.id)} disabled={isSubmitting} >{isSubmitting ? 'Deleting...' : 'DELETE'}</Button>
                             &nbsp;&nbsp;
                             <Button variant='warning' >SHORT LIST</Button>
                         </td>

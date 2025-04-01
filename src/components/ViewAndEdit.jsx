@@ -30,14 +30,28 @@ function ViewAndEdit() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await api1.get(`${ApiRoutes.COLLECT_ALL_USERS.path}`, {
+        const response = await api1.get(`${ApiRoutes.GET_USERS.path}/${id}`, {
           authenticate: ApiRoutes.COLLECT_ALL_USERS.authenticate
         });
         setFormData(response.data); // Assuming the API returns the user data
         console.log(response.data)
       } catch (error) {
-        toast.error('Failed to fetch user data');
-        console.error('Error details:', error.response?.data || error.message);
+        let errorMessage = 'Failed to fetch user data';
+        if (error.response) {
+          // Handle HTTP errors (4xx, 5xx)
+          if (error.response.status === 404) {
+            errorMessage = 'User not found';
+          } else if (error.response.status === 401) {
+            errorMessage = 'Unauthorized access';
+          } else if (error.response.data?.message) {
+            errorMessage = error.response.data.message;
+          }
+        } else if (error.request) {
+          // The request was made but no response received
+          errorMessage = 'Network error - no response from server';
+        }
+        toast.error(errorMessage);
+        console.error('Error details:', error);
       }
     };
 
@@ -74,10 +88,22 @@ function ViewAndEdit() {
       toast.success(response.message);
       navigate('/database/userData');
     } catch (error) {
-      toast.error('Failed to update user');
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
+      let errorMessage = 'Failed to update user';
+      if (error.response) {
+        if (error.response.status === 400) {
+          errorMessage = 'Validation error: ' + 
+            (error.response.data?.errors?.join(', ') || 'Invalid data');
+        } else if (error.response.data?.message) {
+          errorMessage = error.response.data.message;
+        }
+      }
+      toast.error(errorMessage);
+      console.error('Error details:', error);
+      
+      // Additional debug for FormData issues
+      if (error.message.includes('FormData')) {
+        console.log('FormData contents:', Array.from(error.formDataToSend.entries()));
+      }
     }
   };
 
